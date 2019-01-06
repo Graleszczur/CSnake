@@ -9,21 +9,21 @@
 //#include <stdarg.h>
 using namespace std;
 
-class CView
+class CView//prostokat cos do obudowania
 {
 protected:
   CRect geom;
 
 public:
   CView(CRect g) : geom(g) {}
-  virtual ~CView() {}
+  virtual ~CView() {}		//virtual, klasa nie ma tej metody, ale te metody powinny byc u kogos kto dziedziczy, nie ma destruktora ale pozwala go nadpisac po dziedziczeniu
 
   virtual void paint () = 0;
   virtual bool handleEvent (int key) = 0;
   virtual void move (const CPoint & delta);
 };
 
-class CWindow:public CView
+class CWindow:public CView// obszar roboczy
 {
 protected:
   char c;
@@ -34,7 +34,7 @@ public:
   bool handleEvent(int key);
 };
 
-class CFramedWindow:public CWindow
+class CFramedWindow:public CWindow//obszar roboczy z ramka
 {
 public:
   CFramedWindow(CRect r, char _c = '\'') : CWindow(r, _c) {}
@@ -42,7 +42,7 @@ public:
   void paint();
 };
 
-class CInputLine:public CFramedWindow
+class CInputLine:public CFramedWindow//linia z tekstem
 {
   string text;
 public:
@@ -52,11 +52,11 @@ public:
   bool handleEvent(int c);
 };
 
-class CGroup:public CView
+class CGroup:public CView //cgroup dziedziczy po cview, w tej liscie sa wskazniki na wszystkie klasy ktore dziedzicza po cview, lista zgodnych komponentow zestaw okien
 {
   list< CView * > children;
 public:
-  CGroup(CRect g) : CView(g) {}
+  CGroup(CRect g) : CView(g) {} //przyjmuje w konstruktorze crect
   ~CGroup();
 
   void paint();
@@ -64,7 +64,7 @@ public:
   void insert(CView * v);
 };
 
-class CDesktop:public CGroup
+class CDesktop:public CGroup//opisuje caly terminal
 {
 public:
   CDesktop();
