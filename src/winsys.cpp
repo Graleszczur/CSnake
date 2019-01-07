@@ -192,11 +192,10 @@ void CDesktop::run()//zbiera info, q wywala system okienkowy
     if(c == 'q' || c == 'Q')
       break;
 
-    if(c == KEY_RESIZE || handleEvent(c))//skalowanie po zmianie wielkosci okna terminalu
-    {
+      handleEvent(c);
       update_screen();
       paint();
       refresh();
-    }
+    
   }
 }
