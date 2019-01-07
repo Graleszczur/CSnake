@@ -192,10 +192,12 @@ void CDesktop::run()//zbiera info, q wywala system okienkowy
     if(c == 'q' || c == 'Q')
       break;
 
-      handleEvent(c);
-      update_screen();
-      paint();
-      refresh();
-    
+    if(c == KEY_RESIZE || handleEvent(c))//skalowanie i reakcja
+    {
+        update_screen();
+        paint();
+        refresh();
+    }
+
   }
 }
