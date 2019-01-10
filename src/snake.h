@@ -18,7 +18,7 @@ class CSnake:public CFramedWindow
 		int score;
 		int status;
 		int level;
-		CPoint head;
+		
 		
 		
 		
