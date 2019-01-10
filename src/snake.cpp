@@ -10,8 +10,8 @@ CSnake::CSnake(CRect r, char _c /*=' '*/):
 	body.push_back(CPoint(5, 11));
 	body.push_back(CPoint(5, 12));
 	status = 0; //0-menu,1-gra, 2-help,3-pauza,4-zdech
-	dir_x = 1;
-	dir_y = 0;
+	direction.x = 1;
+	direction.y = 0;
 	score = 0;
 	food_position.x = 10;
 	food_position.y= 10;
@@ -145,8 +145,8 @@ void CSnake::game_reset()
 	body.push_back(CPoint(5, 11));
 	body.push_back(CPoint(5, 12));
 	status = 0; //0-menu,1-gra, 2-help,3-pauza,4-zdech
-	dir_x = 1;
-	dir_y = 0;
+	direction.x = 1;
+	direction.y = 0;
 	score = 0;
 	food_position.x = 10;
 	food_position.y= 10;
@@ -178,32 +178,32 @@ bool CSnake::handleEvent(int key)
 			{
 				if(reversion_denied(1))
 				{
-					dir_x = 0;
-					dir_y = -1;
+					direction.x = 0;
+					direction.y = -1;
 				}
 			}
 			else if(key == KEY_DOWN)
 			{
 				if(reversion_denied(2))
 				{
-					dir_x = 0;
-					dir_y = 1;
+					direction.x = 0;
+					direction.y = 1;
 				}
 			}
 			else if(key == KEY_LEFT)
 			{
 				if(reversion_denied(3))
 				{
-					dir_x = -1;
-					dir_y = 0;
+					direction.x = -1;
+					direction.y = 0;
 				}
 			}
 			else if(key == KEY_RIGHT)
 			{
 				if(reversion_denied(4))
 				{
-					dir_x = 1;
-					dir_y = 0;
+					direction.x = 1;
+					direction.y = 0;
 				}
 			}
 		}
@@ -235,7 +235,7 @@ bool CSnake::reversion_denied(int key)
 {
 	if(key == 1)
 	{
-		if(dir_y == 1)
+		if(direction.y == 1)
 		{
 			return false;
 		}	
@@ -244,7 +244,7 @@ bool CSnake::reversion_denied(int key)
 	}
 	else if(key == 2)
 	{
-		if(dir_y == -1)
+		if(direction.y == -1)
 		{
 			return false;
 		}	
@@ -253,7 +253,7 @@ bool CSnake::reversion_denied(int key)
 	}
 	else if(key == 3)
 	{
-		if(dir_x == 1)
+		if(direction.x == 1)
 		{
 			return false;
 		}	
@@ -262,7 +262,7 @@ bool CSnake::reversion_denied(int key)
 	}
 	else if(key == 4)
 	{
-		if(dir_x == -1)
+		if(direction.x == -1)
 		{
 			return false;
 		}	
@@ -284,8 +284,8 @@ void CSnake::move()
 }
 void CSnake::go_through_wall()
 {
-	int x = body[0].x + dir_x; 
-	int y = body[0].y + dir_y;
+	int x = body[0].x + direction.x; 
+	int y = body[0].y + direction.y;
 	
 	if(x <= 0)
 	{

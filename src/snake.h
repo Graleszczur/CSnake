@@ -13,8 +13,7 @@ class CSnake:public CFramedWindow
 	private:
 		std::vector<CPoint> body;
 		CPoint food_position;
-		int dir_x;
-		int dir_y;
+		CPoint direction;
 		int score;
 		int status;
 		int level;
