@@ -15,6 +15,7 @@ CSnake::CSnake(CRect r, char _c /*=' '*/):
 	score = 0;
 	food_position.x = 10;
 	food_position.y= 10;
+	level = 1;
 	
 	
 }
@@ -22,7 +23,8 @@ CSnake::CSnake(CRect r, char _c /*=' '*/):
 void CSnake::paint()
 {
 	gotoyx(geom.topleft.y -1, geom.topleft.x);
-	printl("|SCORE: %d|", score);
+	level = (int)(score/4) + 1;
+	printl("|SCORE: %d|.....|LEVEL: %d|", score, level);
 	if(status == 0)
 	{
 		CFramedWindow::paint();
@@ -42,10 +44,18 @@ void CSnake::paint()
 	else if(status == 1)
 	{
 		CFramedWindow::paint();
-		int speed = score * 5000;
-		if(speed >= 100000)
+		int speed;
+		switch(level)
 		{
-			speed = 100000;
+		case 1: speed = 5000; 	break;
+		case 2:	speed = 10000;	break;
+		case 3:	speed = 15000;	break;
+		case 4:	speed = 20000;	break;
+		case 5:	speed = 30000;	break;
+		case 6: speed = 50000;	break;	
+		case 7: speed = 70000;	break;
+		case 8: speed = 90000;	break;
+		default: speed = 110000; break;
 		}
 		usleep(120000 - (speed));
 		move();
@@ -140,6 +150,7 @@ void CSnake::game_reset()
 	score = 0;
 	food_position.x = 10;
 	food_position.y= 10;
+	level = 1;
 	
 	
 }
